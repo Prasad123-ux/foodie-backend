@@ -35,7 +35,10 @@ const { findReviewRoutes } = require('./Routes/findReviwRoutes')
 const { getShopOrderRoute } = require('./Routes/shopOwner/getOderRoutes')
 const { getReviewProductRoute } = require('./Routes/shopOwner/getReviewProductRoutes')
 const app= express()
-require('dotenv').config()
+const dotenv = require('dotenv');
+
+// Load environment variables from .env file
+dotenv.config();
 
 
 
