@@ -35,10 +35,10 @@ const { findReviewRoutes } = require('./Routes/findReviwRoutes')
 const { getShopOrderRoute } = require('./Routes/shopOwner/getOderRoutes')
 const { getReviewProductRoute } = require('./Routes/shopOwner/getReviewProductRoutes')
 const app= express()
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 
-// Load environment variables from .env file
-dotenv.config();
+// // Load environment variables from .env file
+// dotenv.config();
 
 
 
@@ -96,7 +96,7 @@ app.use('/api', getReviewProductRoute)
 
 // app.use('/api',getUserDetailRoute)
 
-let port = process.env.PORT || 3000
+let port =process.env.PORT
 
 app.listen(port, ()=>{
     console.log(`server is running on ${port}`)
