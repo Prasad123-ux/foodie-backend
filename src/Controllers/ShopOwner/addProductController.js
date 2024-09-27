@@ -7,9 +7,7 @@ const addProductController=(req ,res)=>{
     console.log(req.body)
 
 
-OwnerRegister.findOne({shopName:req.body.shopName}).exec()
-.then((user)=>{
-    if(user!==null){
+
 
         const productDataObject= new ProductData({
             product_name:req.body.productData.name,
@@ -45,14 +43,12 @@ OwnerRegister.findOne({shopName:req.body.shopName}).exec()
                 res.status(500).json({success:false, message:"data not saved", err:err})
             })
 
-    }else{
-        res.status(404).json({success:false, message:"Shop Not Found"})
-    }
+   
 
-})
+}
 
 
    
-}
+
 
 module.exports={addProductController}

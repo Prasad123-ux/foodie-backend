@@ -1,61 +1,44 @@
+const { ProductData } = require("../Modules/Products");
+const { FoodCart } = require("../Modules/cartData");
 
-const { ProductData } = require("../Modules/Products")
-const { FoodCart } = require("../Modules/cartData")
-const { foodItem } = require("../Modules/foodItem")
+const addCartControllers = async (req, res) => {
+    const mail = req.email;
+    const productId = req.body.id;
+    const { size, qty } = req.body;
 
-const addCartControllers=(req, res)=>{
-    // console.log(req.body.id)
+    try {
+        const item = await ProductData.findOne({ _id: productId }).exec();
+        if (!item) {
+            return res.status(404).json({ message: "Product not available" });
+        }
 
-    ProductData.findOne({_id:req.body.id}).exec()
-    .then((item)=>{
-        FoodCart.findOne({id:req.body.id}).exec()
-        .then((user)=>{
-            console.log(user)
-            if(user!==null){
-                res.status(404).json({success:false, message:"data already found"})
-            }else{
+        const existingCartItems = await FoodCart.find({ id: productId }).exec();
 
-        //    console.log(item)
-        //    console.log(req.body)
-   if(item!==null){
-    
+        const userCartItem = existingCartItems.find(cartItem => cartItem.email === mail);
 
-const FoodCartObject=new FoodCart({
-    email:req.email,
-    id:req.body.id,
-    size:req.body.size,
-    // price:req.body.buyValue,
-    qty:req.body.qty,
-    CategoryName:item.product_category,
-    name:item.product_name,
-     img:item.product_images.image1,
-      price:item.product_price,
-    description:item.product_description,
-    deliveryTime:item.product_deliveryTime
+        if (userCartItem) {
+            return res.status(404).json({ success: false, message: "Data already found" });
+        }
 
+        const newFoodCartObject = new FoodCart({
+            email: mail,
+            id: productId,
+            size: size,
+            qty: qty,
+            CategoryName: item.product_category,
+            name: item.product_name,
+            img: item.product_images.image1,
+            price: item.product_price,
+            description: item.product_description,
+            deliveryTime: item.product_deliveryTime
+        });
 
-    
-})
+        await newFoodCartObject.save();
+        res.status(200).json({ message: "cart updated" });
 
-FoodCartObject.save().then(()=>{
-    res.status(200).json({message:"cart updated"})
+    } catch (err) {
+        res.status(500).json({ message: "problem while data saving", error: err });
+    }
+};
 
-}).catch((err)=>{
-    res.status(500).json({message:"problem while data saving"})
-
-})
-
-    }else{
-    res.status(404).json({message:"Product not available "})
-   }
-
-}
-
-})
-})
-
-
-}
-
-
-module.exports={addCartControllers}
+module.exports = { addCartControllers };

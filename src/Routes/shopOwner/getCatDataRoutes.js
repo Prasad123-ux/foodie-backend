@@ -4,6 +4,6 @@ const getCatDataRoute= express.Router()
 
 
 
-getCatDataRoute.post('/getCatData', getCatDataController)
+getCatDataRoute.get('/getCatData', getCatDataController)
 
 module.exports={getCatDataRoute}

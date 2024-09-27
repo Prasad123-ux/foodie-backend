@@ -42,7 +42,7 @@ const app= express()
 
    dotenv.config();
 
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT || 10000;
 
 
 
@@ -57,7 +57,7 @@ app.use(express.json())
 //     next();
 // })
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"

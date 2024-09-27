@@ -6,19 +6,19 @@ const { Food } = require('../Modules/users')
 // import { JsonWebTokenError } from "jsonwebtoken"
 
 const cartAuthMiddleware=(req, res, next)=>{
-     console.log(req.body)
+    //  console.log(req.body)
     
     const token= req.body.token  
     if(token==='undefined'){
         res.status(403).json({message:"Please login "})
     }else{
-        console.log("accessed")
+        // console.log("accessed")
         
         const decoded= jwt.verify(token , process.env.JWT_TOKEN)
         // console.log(decoded)
-        console.log("token unaccessed")
+        // console.log("token unaccessed")
          req.email= decoded.email
-         console.log(req.email)
+        //  console.log(req.email)
  
         Food.findOne({email:decoded.email}).exec()
         .then((user)=>{

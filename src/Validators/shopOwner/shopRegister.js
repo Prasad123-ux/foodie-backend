@@ -24,4 +24,4 @@ shopRegisterValidators=[
 ]
 
 
-module.exports={shopRegisterValidators}
+module.exports={shopRegisterValidators}  

@@ -3,7 +3,7 @@
 const { FoodCart } = require("../Modules/cartData")
 
 const getCartController= (req, res)=>{
-    // console.log(req.body)
+     console.log(req.body)
     FoodCart.find({email:req.email}).exec()
     .then((users)=>{
         if(users!==null)
