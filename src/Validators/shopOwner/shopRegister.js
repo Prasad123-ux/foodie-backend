@@ -3,7 +3,7 @@
 const {check}= require('express-validator')
 
 
-shopRegisterValidators=[
+   const shopRegisterValidators=[
     check('email', 'Please enter valid Email').isEmail(),
     check('mobile_no', 'Please enter valid mobile Number').isMobilePhone(),
     check('password',"Please enter alphanumeric password").isStrongPassword(),
