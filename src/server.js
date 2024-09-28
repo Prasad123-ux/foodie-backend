@@ -42,7 +42,7 @@ const app= express()
 
    dotenv.config();
 
-  const port = process.env.PORT || 10000;
+  const port = process.env.PORT || 8500;
 
 
 
