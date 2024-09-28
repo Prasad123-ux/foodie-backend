@@ -35,16 +35,19 @@ const { findReviewRoutes } = require('./Routes/findReviwRoutes')
 const { getShopOrderRoute } = require('./Routes/shopOwner/getOderRoutes')
 const { getReviewProductRoute } = require('./Routes/shopOwner/getReviewProductRoutes') 
 const cors= require("cors")
-
-
 const app= express()
+const dotenv = require('dotenv');
+dotenv.config();
 
- const dotenv = require('dotenv');
 
-   dotenv.config();
+
+
+
+
+
 
   const port = process.env.PORT || 8500;
-
+app.use(cors())
 
 
 
