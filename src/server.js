@@ -33,7 +33,8 @@ const { updateLocationRoutes } = require('./Routes/updateLocationRoutes')
 const { submitReviewRoute } = require('./Routes/submitReviewRoutes')
 const { findReviewRoutes } = require('./Routes/findReviwRoutes')
 const { getShopOrderRoute } = require('./Routes/shopOwner/getOderRoutes')
-const { getReviewProductRoute } = require('./Routes/shopOwner/getReviewProductRoutes')
+const { getReviewProductRoute } = require('./Routes/shopOwner/getReviewProductRoutes') 
+const cors= require("cors")
 
 
 const app= express()
@@ -48,6 +49,28 @@ const app= express()
 
 
 app.use(express.json())
+
+const allowedOrigins = [
+  "https://snackhuub.vercel.app/", // Replace this with your actual Vercel frontend URL
+  "http://localhost:3000"             // Allow local development for testing
+];
+
+// CORS configuration options
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Check if the incoming origin is in the allowedOrigins array
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // Allow credentials (e.g., cookies, authorization headers)
+  optionsSuccessStatus: 200
+};
+
+// Use the cors middleware with the configured options
+app.use(cors(corsOptions));
 // app.use((req, res, next)=>{
 //     res.setHeader("Access-Control-Allow-origin","http://localhost:5173");
 //     res.header(
@@ -57,7 +80,7 @@ app.use(express.json())
 //     next();
 // })
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://snackhuub-git-master-prasad-metkars-projects.vercel.app/");
+    res.setHeader("Access-Control-Allow-Origin", "https://snackhuub.vercel.app/");
     res.header(
         "Access-Control-Allow-Headers",
         "Origin, X-Requested-With, Content-Type, Accept"
