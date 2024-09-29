@@ -1,7 +1,7 @@
 const { Reviews } = require("../../Modules/review")
 
 const getReviewProductDataController=(req, res)=>{
-    req.body 
+
     Reviews.find({product_mail:req.email}).exec()
     .then((user)=>{
         if(user){

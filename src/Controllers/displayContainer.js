@@ -10,7 +10,8 @@ const { foodItem } = require("../Modules/foodItem")
 //  const foodCategoryPromise= foodCategory.find().exec()
 
 
-//  Promise.all([foodItemPromise, foodCategoryPromise])
+//  Promise.all([foodItemPromise, foodCategoryPromise]) 
+console.log(req.body)
 
 ProductData.find().exec()
 .then((user)=>{

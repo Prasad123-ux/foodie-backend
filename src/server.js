@@ -39,7 +39,7 @@ const app= express()
 const dotenv = require('dotenv');
 dotenv.config();
 
-
+  
 
 
 
@@ -47,33 +47,33 @@ dotenv.config();
 
 
   const port = process.env.PORT || 8500;
-app.use(cors())
+// app.use(cors())
 
 
 
 app.use(express.json())
 
-const allowedOrigins = [
-  "https://snackhuub.vercel.app/", // Replace this with your actual Vercel frontend URL
-  "http://localhost:3000"             // Allow local development for testing
-];
+// const allowedOrigins = [
+//   "https://snackhuub.vercel.app/", // Replace this with your actual Vercel frontend URL
+//   "http://localhost:3000"             // Allow local development for testing
+// ];
 
-// CORS configuration options
-const corsOptions = {
-  origin: function (origin, callback) {
-    // Check if the incoming origin is in the allowedOrigins array
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true, // Allow credentials (e.g., cookies, authorization headers)
-  optionsSuccessStatus: 200
-};
+// // CORS configuration options
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     // Check if the incoming origin is in the allowedOrigins array
+//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true, // Allow credentials (e.g., cookies, authorization headers)
+//   optionsSuccessStatus: 200
+// };
 
-// Use the cors middleware with the configured options
-app.use(cors(corsOptions));
+// // Use the cors middleware with the configured options
+// app.use(cors(corsOptions));
 // app.use((req, res, next)=>{
 //     res.setHeader("Access-Control-Allow-origin","http://localhost:5173");
 //     res.header(
@@ -82,14 +82,20 @@ app.use(cors(corsOptions));
 //     );
 //     next();
 // })
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://snackhuub.vercel.app/");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-});
+
+
+app.use(
+  cors({
+    origin: 'https://snackhuub.vercel.app/', // Frontend origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    credentials: true, // Allow credentials (cookies, etc.)
+  })
+);  
+
+
+
+ 
 
 
 app.use('/api', addCartRoutes)
