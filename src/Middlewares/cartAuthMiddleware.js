@@ -3,22 +3,20 @@ const { Food } = require('../Modules/users')
 
  require('dotenv').config()
 
-// import { JsonWebTokenError } from "jsonwebtoken"
+
 
 const cartAuthMiddleware=(req, res, next)=>{
-    //  console.log(req.body)
+console.log(req.body.token)
     
-    const token= req.body.token  
+    const token= req.body.token   
+    console.log(token)
     if(token==='undefined'){
         res.status(403).json({message:"Please login "})
     }else{
-        // console.log("accessed")
         
         const decoded= jwt.verify(token , process.env.JWT_TOKEN)
-        // console.log(decoded)
-        // console.log("token unaccessed")
+      
          req.email= decoded.email
-        //  console.log(req.email)
  
         Food.findOne({email:decoded.email}).exec()
         .then((user)=>{

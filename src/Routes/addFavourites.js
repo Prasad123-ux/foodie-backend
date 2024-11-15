@@ -5,7 +5,7 @@ const { checkFavouriteMiddleware } = require('../Middlewares/checkFavouriteMiddl
 const addFavouritesRoutes= express.Router()
   
 
-addFavouritesRoutes.post('/addFavourites',cartAuthMiddleware, checkFavouriteMiddleware,  addfoodFavouriteController)
+addFavouritesRoutes.get('/addFavourites/:id', checkFavouriteMiddleware,  addfoodFavouriteController)
 
 
 module.exports={addFavouritesRoutes}

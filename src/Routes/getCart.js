@@ -7,6 +7,6 @@ const getCart= express.Router()
 
 
 
-getCart.post('/getCart', getCartController)
+getCart.post('/getCart',cartAuthMiddleware, getCartController)
 
 module.exports={getCart}

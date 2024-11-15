@@ -1,16 +1,13 @@
-// import { foodFavourites } from "../Modules/foodFavourites"
-// import { ProductData } from "../Modules/Products"
-// import { foodFavourites } from "../Modules/foodFavourites"
-// import { foodItem } from "../Modules/foodItem"
+
 const {ProductData}= require('../Modules/Products')
 const {foodFavourites}= require('../Modules/foodFavourites')
 
 
 
 const addfoodFavouriteController=(req, res)=>{
-    // console.log(req.body)
+    
 
-    ProductData.findOne({_id:req.body.id}).exec()
+    ProductData.findOne({_id:req.params.id}).exec()
     .then((item)=>{
         console.log(item)
         if(item!==null){
@@ -31,9 +28,9 @@ const addfoodFavouriteController=(req, res)=>{
 
             })
             foodFavouriteObject.save().then(()=>{
-        res.status(200).json({message:'data saved'})
+        res.status(200).json({message:'Item added in favourites'})
             }).catch((err)=>{
-                res.status(404).json({message:"data not saved", err:err})
+                res.status(404).json({message:"Internal server Error", err:err})
 
             })
         }
