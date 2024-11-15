@@ -4,8 +4,8 @@ env.config()
 
 
 
-   mongoose.connect(`mongodb://0.0.0.0/foods`) 
-  // mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@snackhub.gbljr.mongodb.net/?retryWrites=true&w=majority&appName=snackhub`)
+// //    mongoose.connect(`mongodb://0.0.0.0/foods`) /
+   mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@snackhub.gbljr.mongodb.net/?retryWrites=true&w=majority&appName=snackhub`)
 .then(()=>{
     console.log("connected",)
 
